@@ -29,7 +29,7 @@
             const date = document.getElementById("date").value;
             const issue = document.getElementById("issue").value;
 
-            const response = await fetch("/book", {
+            const response = await fetch("http://127.0.0.1:5000/book", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
