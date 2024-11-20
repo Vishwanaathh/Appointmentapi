@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website</title>
+    <title>Book Appointment</title>
 </head>
 <body>
-    <h1>BOOK AN APPOINTMENT</h1>
+    <h1>Book an Appointment</h1>
+
+    <form id="bookForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <label for="issue">Issue:</label><br>
+        <textarea id="issue" name="issue" rows="4" cols="50" required></textarea><br><br>
+
+        <button type="button" onclick="bookAppointment()">Book Appointment</button>
+    </form>
+
+    <p id="responseMessage"></p>
+
+    <script>
+        async function bookAppointment() {
+            const name = document.getElementById("name").value;
+            const date = document.getElementById("date").value;
+            const issue = document.getElementById("issue").value;
+
+            const response = await fetch("/book", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, date, issue }),
+            });
+
+            const result = await response.text();
+            document.getElementById("responseMessage").innerText = result;
+        }
+    </script>
 </body>
 </html>
